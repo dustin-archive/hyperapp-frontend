@@ -1,0 +1,169 @@
+@charset 'UTF-8';
+
+//
+// # Fonts
+// =============================================================================
+
+@font-face {
+  font-family: 'Material Icons';
+  src: local('MaterialIcons'), local('MaterialIcons-Regular'), url('../assets/fonts/MaterialIcons-Regular.woff2') format('woff2'), url('../assets/fonts/MaterialIcons-Regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: local('Roboto'), local('Roboto-Regular'), url('../assets/fonts/roboto-v16-latin-regular.woff2') format('woff2'), url('../assets/fonts/roboto-v16-latin-regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto Mono';
+  src: local('RobotoMono'), local('RobotoMono-Regular'), url('../assets/fonts/roboto-mono-v4-latin-regular.woff2') format('woff2'), url('../assets/fonts/roboto-mono-v4-latin-regular.woff') format('woff');
+}
+
+//
+// # Variables
+// =============================================================================
+
+$white: #fff;
+$black: #000;
+
+$blue: rgb(31, 159, 223);
+$blue-1: mix($blue, $white, 75%);
+
+$dark-1: rgb(31, 33, 35);
+$dark-2: rgb(23, 25, 27);
+$dark-3: rgb(15, 17, 19);
+
+$background-light: rgb(243, 245, 247);
+
+$shadow-top-1: 0 24px 48px -12px rgba($dark-3, 0.125);
+$shadow-top-2: 0 12px 24px -6px rgba($dark-3, 0.125);
+
+//
+// # Reset
+// =============================================================================
+
+* {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
+  text-decoration: inherit;
+  -webkit-overflow-scrolling: touch; // HACK: webkit iOS: enable momentum scrolling on overflow elements
+}
+
+*, *::after, *::before {
+  box-sizing: inherit;
+}
+
+body, svg, table {
+  width: 100%;
+}
+
+body {
+  font: 400 1em/1 '-apple-system', BlinkMacSystemFont, sans-serif;
+  box-sizing: border-box;
+  -webkit-font-smoothing: subpixel-antialiased; // HACK: Safari: `position: fixed` changes font-smoothing
+}
+
+button {
+  user-select: none;
+}
+
+//
+// # Picker Card
+// =============================================================================
+
+.picker-card-data {
+  padding: 18px 12px;
+}
+
+.picker-card-button {
+
+}
+
+.picker-card-button {
+  // border-radius: 0 0 5px 5px;
+  display: block;
+  padding: 14px 12px;
+  color: $white;
+  font-family: Roboto;
+  letter-spacing: 0.0625em;
+  text-transform: uppercase;
+  background: $blue;
+  cursor: pointer;
+  user-select: none;
+
+  &:hover {
+    background: $blue-1;
+  }
+}
+
+.picker-card-image {
+  // border-radius: 5px 5px 0 0;
+  width: 100%;
+  padding: 100% 0 0;
+  background: $background-light;
+  // box-shadow: inset 0 0 0 2px rgb(222, 224, 226);
+}
+
+.picker-card img {
+  // border-radius: 5px 5px 0 0;
+  width: 100%;
+}
+
+.picker-card {
+  // border-radius: 5px;
+  flex: 1;
+  margin: 12px;
+  // box-shadow: inset 0 0 0 2px rgb(222, 224, 226);
+  text-align: center;
+  background: $white;
+  box-shadow: $shadow-top-1;
+}
+
+//
+// # Picker Cards
+// =============================================================================
+
+.picker-cards {
+  display: flex;
+}
+
+//
+// # Picker Selects
+// =============================================================================
+
+.picker-selects select {
+  flex: 1;
+  height: 40px;
+  margin: 12px;
+  // border: 2px solid rgb(31, 159, 223);
+  background: $white;
+}
+
+.picker-selects {
+  display: flex;
+}
+
+//
+// # Picker
+// =============================================================================
+
+.picker {
+  // border-radius: 5px;
+  margin: 24px;
+  padding: 12px;
+  // background: $white;
+  // box-shadow: 0 16px 64px -16px rgba(31, 33, 35, 0.25);
+}
+
+//
+// # Body
+// =============================================================================
+
+body {
+  background: $background-light;
+}

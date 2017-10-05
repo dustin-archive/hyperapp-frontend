@@ -1,0 +1,47 @@
+{
+  "name": "hyperapp-frontend",
+  "version": "0.0.0",
+  "description": "",
+  "author": "Dustin Dowell <dustindowell22@gmail.com>",
+  "license": "MIT",
+  "main": "src/main.js",
+  "scripts": {
+    "js": "rollup src/main.js -o dist/bundle.js -f iife -m -c",
+    "css": "node-sass --output-style compressed src/main.scss | postcss -u autoprefixer -o dist/styles.css",
+    "clean": "rm -rf dist && mkdir dist",
+    "build": "run-s clean js css",
+    "sync": "browser-sync start -s --no-ui",
+    "reload": "browser-sync reload",
+    "watch-js": "chokidar 'src/**/*.js' -c 'run-s js reload'",
+    "watch-css": "chokidar 'src/**/*.scss' -c 'run-s css reload'",
+    "dev": "env $(cat .env) run-p sync watch-js watch-css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/whaaaley/hyperapp-frontend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/whaaaley/hyperapp-frontend/issues"
+  },
+  "homepage": "https://github.com/whaaaley/hyperapp-frontend#readme",
+  "dependencies": {
+    "@hyperapp/router": "^0.3.0",
+    "classwrap": "^1.1.0",
+    "hyperapp": "^0.12.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^7.1.4",
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "browser-sync": "^2.18.13",
+    "chokidar-cli": "^1.2.0",
+    "node-sass": "^4.5.3",
+    "npm-run-all": "^4.1.1",
+    "postcss-cli": "^4.1.1",
+    "rollup": "^0.50.0",
+    "rollup-plugin-babel": "^3.0.2",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-replace": "^2.0.0",
+    "rollup-plugin-uglify": "^2.0.1"
+  }
+}
