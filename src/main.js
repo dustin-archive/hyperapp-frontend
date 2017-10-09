@@ -1,5 +1,6 @@
 import { app, h } from 'hyperapp'
 
+// Helpers
 const queryDecode = query => {
   query = query.slice(1).split('&')
   const result = {}
@@ -20,10 +21,8 @@ const queryEncode = queries => {
   return result === '' ? '' : `?${result.slice(1)}`
 }
 
-const Home = ({ state, actions }, children) =>
-  h('div', null, children)
-
-app({
+// Mixins
+const Router = {
   state: {
     query: {},
     route: '/'
@@ -36,8 +35,8 @@ app({
       state.route = hash.slice(1, index === -1 ? hash.length : index)
       return state
     },
-    go ({ query, route }, _, { query: q, route: r }) {
-      window.location.hash = (r || route) + queryEncode(q || query)
+    go (state, _, { query, route }) {
+      window.location.hash = (route || state.route) + queryEncode(query || state.query)
     }
   },
   events: {
@@ -48,6 +47,7 @@ app({
         init()
       }
 
+      // Testing
       setTimeout(() => {
         go({ route: '/honky' })
       }, 2000)
@@ -60,21 +60,77 @@ app({
         window.location.hash = '/howdy'
       }, 6000)
     }
-  },
-  view: (state, actions) => {
-    switch (state.route) {
-      case '/':
-        return h(Home, { state, actions }, 'home is where i live')
-      case '/about':
-        return h('div', null, 'about')
-      case '/contact':
-        return h('div', null, 'contact')
-      case '/howdy':
-        return h('div', null, JSON.stringify(state))
-      case '/honky':
-        return h('div', null, JSON.stringify(state))
-      default:
-        return h('div', null, '404')
+  }
+}
+
+// Views
+const Home = ({ state, actions }, children) =>
+  h('div', null, 'home is where i live')
+
+const About = () =>
+  h('div', null, 'about')
+
+const Contact = () =>
+  h('div', null, 'contact')
+
+const Howdy = ({ state, actions }) =>
+  h('div', null, JSON.stringify(state))
+
+const Honky = ({ state, actions }) =>
+  h('div', null, JSON.stringify(state))
+
+const NotFound = () =>
+  h('div', null, '404')
+
+const RouterView = ({ state, actions }) => {
+  switch (state.route) {
+    case '/':
+      return h(Home, { state, actions })
+    case '/about':
+      return h(About)
+    case '/contact':
+      return h(Contact)
+    case '/howdy':
+      return h(Howdy, { state, actions })
+    case '/honky':
+      return h(Honky, { state, actions })
+    default:
+      return h(NotFound)
+  }
+}
+
+const RouterLink = ({ state, actions, to }, children) =>
+  h('a', {
+    onclick () {
+      actions.go({ route: to })
     }
+  }, children)
+
+// App
+app({
+  mixins: [
+    Router
+  ],
+  view: (state, actions) => {
+    const Component = (tag, data, children) =>
+      h(tag, Object.assign(data, { state, actions }), children)
+
+    // view
+    return h('ul', null, [
+      h('li', null, [
+        h('div', {
+          onclick () {
+            actions.go({ route: '/honky' })
+          }
+        }, 'go to honky')
+      ]),
+      h('li', null, [
+        Component(RouterLink, { to: '/home' }, 'go home')
+      ]),
+      h('li', null, [
+        h('a', { href: '#/howdy' }, 'go howdy')
+      ]),
+      RouterView({ state, actions })
+    ])
   }
 })
