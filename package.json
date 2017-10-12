@@ -5,7 +5,6 @@
   "author": "Dustin Dowell <dustindowell22@gmail.com>",
   "license": "MIT",
   "main": "src/main.js",
-  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/whaaaley/hyperapp-frontend.git"
