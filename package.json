@@ -25,7 +25,6 @@
   },
   "homepage": "https://github.com/whaaaley/hyperapp-frontend#readme",
   "dependencies": {
-    "@hyperapp/router": "^0.3.0",
     "classwrap": "^1.1.0",
     "hyperapp": "^0.12.1"
   },
