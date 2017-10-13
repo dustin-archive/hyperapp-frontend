@@ -10,7 +10,10 @@ build: fresh
 	uglify dist/app.js -o dist/app.js
 	postcss dist/app.css -o dist/app.css -u autoprefixer
 
-fresh: clean js css
+fresh: env clean js css
+
+env:
+	env $(cat .env)
 
 clean:
 	rm -rf dist
