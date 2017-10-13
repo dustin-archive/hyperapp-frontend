@@ -31,6 +31,3 @@ watcher.on('event', event => {
     console.log('reload...')
   }
 })
-
-// stop watching
-// watcher.close()
